@@ -67,14 +67,18 @@ class TestNotebooks(unittest.TestCase):
 
     def test_ch08(self):
         this_dir = os.path.dirname(os.path.abspath(__file__))
-        run_ipynb(os.path.join(this_dir,
-                               '../ch08/ch08.ipynb'))
+
+        # only check on Python 3 because of unicode inconvenience
+        # in Python 2.7
+        if (sys.version_info >= (3, 0)):
+            run_ipynb(os.path.join(this_dir,
+                                   '../ch08/ch08.ipynb'))
 
     def test_ch09(self):
         this_dir = os.path.dirname(os.path.abspath(__file__))
 
         # run only on Py3, because of the Py3 specific pickle files
-
+        # created in chapter 08
         if (sys.version_info >= (3, 0)):
 
             try:
@@ -98,7 +102,6 @@ class TestNotebooks(unittest.TestCase):
         run_ipynb(os.path.join(this_dir,
                                '../ch11/ch11.ipynb'))
 
-    # too computationally expensive for travis, generates timeout err
     def test_ch12(self):
         this_dir = os.path.dirname(os.path.abspath(__file__))
         run_ipynb(os.path.join(this_dir,
